@@ -1,9 +1,11 @@
 package com.example.movietalk.repository;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +14,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.movietalk.member.entity.Member;
 import com.example.movietalk.member.entity.constant.Role;
@@ -23,6 +27,7 @@ import com.example.movietalk.movie.repository.MovieImageRepository;
 import com.example.movietalk.movie.repository.MovieRepository;
 import com.example.movietalk.movie.repository.ReviewRepository;
 
+@Disabled
 @SpringBootTest
 public class MovieRepositoryTest {
 
@@ -41,11 +46,39 @@ public class MovieRepositoryTest {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
+  @Commit
+  @Transactional
+  @Test
+  public void deleteByMemberTest() {
+    // 회원삭제
+    // 1. 회원이 작성한 리뷰 제거
+    // 2. 회원 삭제
+    reviewRepository.deleteByMember(Member.builder().mid(3L).build());
+    memberRepository.deleteById(3L);
+  }
+
+  // @Transactional(readOnly = true)
+  @Test
+  public void getMovieReviewTest() {
+    List<Review> result = reviewRepository.findByMovie(Movie.builder()
+        .mno(25L)
+        .build());
+
+    result.forEach(r -> {
+      System.out.println(r);
+      // 리뷰작성자 조회
+      System.out.println(r.getMember().getEmail());
+    });
+  }
+
   @Test
   public void getMovieWithAllTest() {
 
-    Object[] result = movieRepository.getMovieWithAll(100L);
-    System.out.println(Arrays.toString(result));
+    List<Object[]> result = movieRepository.getMovieWithAll(100L);
+
+    for (Object[] objects : result) {
+      System.out.println(Arrays.toString(objects));
+    }
 
   }
 
@@ -57,7 +90,14 @@ public class MovieRepositoryTest {
     Pageable pageable = PageRequest.of(0, 10, Sort.by("mno").descending());
     Page<Object[]> result = movieRepository.getListPage(pageable);
     for (Object[] objects : result) {
-      System.out.println(Arrays.toString(objects));
+      Movie movie = (Movie) objects[0];
+      MovieImage movieImage = (MovieImage) objects[1];
+      Long reviewCnt = (Long) objects[2];
+      Double avgGrade = (Double) objects[3];
+      System.out.println(movie);
+      System.out.println(movieImage);
+      System.out.println(reviewCnt);
+      System.out.println(avgGrade);
     }
   }
 

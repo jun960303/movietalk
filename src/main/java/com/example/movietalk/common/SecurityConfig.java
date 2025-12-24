@@ -32,8 +32,8 @@ public class SecurityConfig {
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
     http.authorizeHttpRequests(authorize -> authorize
-        .requestMatchers("/", "/assets/**", "/member/auth", "/img/**").permitAll()
-        .requestMatchers("/member/register").permitAll());
+        .requestMatchers("/", "/assets/**", "/img/**", "/js/**").permitAll()
+        .anyRequest().permitAll());
 
     // 토큰 기반 처리(예전에는 db 기반)
     // .rememberMe(remember -> remember.rememberMeServices(rememberMeServices));
