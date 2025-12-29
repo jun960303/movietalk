@@ -39,6 +39,9 @@ public class MovieImage extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "mno")
-
   private Movie movie;
+
+  public void setOrd(int ord) {
+    this.ord = ord;
+  }
 }

@@ -28,7 +28,7 @@ public class MovieImageDTO {
 
     // java.net
     try {
-      thumbFullPath = URLEncoder.encode(path + "/s_" + uuid + "-" + imgName, "utf-8");
+      thumbFullPath = URLEncoder.encode(path + "/s_" + uuid + "_" + imgName, "utf-8");
 
     } catch (UnsupportedEncodingException e) {
       e.printStackTrace();
