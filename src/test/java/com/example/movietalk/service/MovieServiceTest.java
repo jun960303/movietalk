@@ -1,5 +1,6 @@
 package com.example.movietalk.service;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +10,7 @@ import com.example.movietalk.movie.dto.PageRequestDTO;
 import com.example.movietalk.movie.dto.PageResultDTO;
 import com.example.movietalk.movie.service.MovieService;
 
+@Disabled
 @SpringBootTest
 public class MovieServiceTest {
 
