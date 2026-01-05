@@ -12,38 +12,42 @@ import lombok.ToString;
 
 @ToString
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class MovieImageDTO {
+    private Long inum;
 
-  private Long inum;
-  private String uuid;
-  private String path;
-  private String imgName;
+    private String uuid;
 
-  public String getThumbnailURL() {
-    String thumbFullPath = "";
+    private String path;
 
-    // java.net
-    try {
-      thumbFullPath = URLEncoder.encode(path + "/s_" + uuid + "_" + imgName, "utf-8");
+    private String imgName;
 
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
+    public String getThumbnailURL() {
+        String thumbFullPath = "";
+
+        // java.net.URL~~
+        try {
+            // 2025/12/24/s_4ac87a98-9e6d-4522-afad-41dd3f95772b_test0.jpg
+            thumbFullPath = URLEncoder.encode(path + "/s_" + uuid + "_" + imgName, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return thumbFullPath;
     }
-    return thumbFullPath;
-  }
 
-  public String getImageURL() {
-    String fullPath = "";
+    public String getImageURL() {
+        String fullPath = "";
 
-    try {
-      fullPath = URLEncoder.encode(path + "/" + uuid + "_" + imgName, "utf-8");
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
+        // java.net.URL~~
+        try {
+            // 2025/12/24/4ac87a98-9e6d-4522-afad-41dd3f95772b_test0.jpg
+            fullPath = URLEncoder.encode(path + "/" + uuid + "_" + imgName, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return fullPath;
     }
-    return fullPath;
-  }
 }

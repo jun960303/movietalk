@@ -13,23 +13,24 @@ import lombok.ToString;
 
 @ToString
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class MovieDTO {
 
-  private Long mno;
-  private String title;
+    private Long mno;
+    private String title;
 
-  // 영화이미지
-  @Builder.Default
-  private List<MovieImageDTO> movieImages = new ArrayList();
+    // 영화이미지
+    @Builder.Default
+    private List<MovieImageDTO> movieImages = new ArrayList<>();
 
-  private double avg;
+    private double avg;
 
-  private Long reviewCnt;
+    private Long reviewCnt;
 
-  private LocalDateTime createDate;
-  private LocalDateTime upDateTime;
+    private LocalDateTime createDate;
+    private LocalDateTime updateDate;
+
 }

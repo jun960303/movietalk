@@ -1,7 +1,6 @@
 package com.example.movietalk.movie.entity;
 
-import com.example.movietalk.common.BaseEntity;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -20,28 +19,27 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
 @ToString(exclude = "movie")
 @Entity
-public class MovieImage extends BaseEntity {
+public class MovieImage {
 
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Id
-  private Long inum;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    private Long inum;
 
-  private String uuid;
+    private String uuid;
 
-  private String path;
+    private String path;
 
-  private String imgName;
+    private String imgName;
 
-  private int ord; // 이미지 순서
+    private int ord; // 이미지 순서
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "mno")
-  private Movie movie;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "mno")
+    private Movie movie;
 
-  public void setOrd(int ord) {
-    this.ord = ord;
-  }
+    public void setOrd(int ord) {
+        this.ord = ord;
+    }
 }

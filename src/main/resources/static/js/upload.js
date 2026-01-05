@@ -6,12 +6,12 @@ const showUploadImages = (files) => {
   let tags = "";
 
   files.forEach((file) => {
-    tags += `<li data-name="${file.imgName}" data-path="${file.path}" data-uuid="${file.uuid}">`;
+    tags += `<li data-name="${file.imgName}" data-path="${file.path}"  data-uuid="${file.uuid}">`;
     tags += `<a href="${file.imageURL}">`;
     tags += `<img src="/upload/display?fileName=${file.thumbnailURL}" class="block">`;
-    tags += `</a>`;
+    tags += "</a>";
     tags += `<span class="text-sm d-inline-block mx-1">${file.imgName}</span>`;
-    tags += `<a href="${file.imageURL}"><i class="fa-solid fa-xmark"></i></a>`;
+    tags += `<a href="${file.imageURL}" data-file=""><i class="fa-solid fa-xmark"></i></a>`;
     tags += "</li>";
   });
   output.insertAdjacentHTML("beforeend", tags);
@@ -35,11 +35,12 @@ fileInput.addEventListener("change", (e) => {
     });
 });
 
-// 등록 클릭 시 (form submit)
+// 등록 클릭 시(form submit)
 document.querySelector("#createForm").addEventListener("submit", (e) => {
   // submit 기능 중지
   e.preventDefault();
-  // uploadResult 인 li 정보 수집 form hidden 태그로 append
+
+  // uploadResult 안 li 정보 수집 후 form hidden 태그로 append
   const attachInfos = document.querySelectorAll(".uploadResult li");
 
   let result = "";
@@ -49,6 +50,7 @@ document.querySelector("#createForm").addEventListener("submit", (e) => {
     result += `<input type="hidden" name="movieImages[${idx}].uuid" value="${obj.dataset.uuid}">`;
     result += `<input type="hidden" name="movieImages[${idx}].path" value="${obj.dataset.path}">`;
   });
+
   e.target.insertAdjacentHTML("beforeend", result);
 
   console.log(e.target.innerHTML);

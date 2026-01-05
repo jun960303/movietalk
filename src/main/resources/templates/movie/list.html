@@ -9,9 +9,10 @@
         <table class="w-full whitespace-no-wrap">
           <thead>
             <tr
-              class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+              class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+            >
               <th class="px-4 py-3">#</th>
-              <th class="px-4 py-3">영화제목</th>
+              <th class="px-4 py-3">영화명</th>
               <th class="px-4 py-3">리뷰수</th>
               <th class="px-4 py-3">리뷰평점</th>
               <th class="px-4 py-3">등록일</th>
@@ -19,8 +20,8 @@
           </thead>
           <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
             <tr class="text-gray-700 dark:text-gray-400" th:each="movie : ${result.dtoList}">
-              <td class="px-4 py-3 text-sm" text="" th:text="${movie.mno}">
-                <!-- mno[[${movie.mno}]] -->
+              <td class="px-4 py-3 text-sm" th:text="${movie.mno}">
+                <!-- mno [[${movie.mno}]] -->
               </td>
               <td class="px-4 py-3">
                 <div class="flex items-center text-sm">
@@ -31,7 +32,8 @@
                       alt=""
                       loading="lazy"
                       th:if="${movie.movieImages.size() > 0 && movie.movieImages[0].path != null}"
-                      th:src="|/upload/display?fileName=${movie.movieImages[0].getThumbnailURL()}|" />
+                      th:src="|/upload/display?fileName=${movie.movieImages[0].getThumbnailURL()}|"
+                    />
                     <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                   </div>
                   <div>
@@ -48,7 +50,8 @@
               <td class="px-4 py-3 text-xs">
                 <span
                   class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
-                  th:text="${movie.avg}">
+                  th:text="${movie.avg}"
+                >
                   <!-- 평점 -->
                 </span>
               </td>
@@ -60,7 +63,8 @@
         </table>
       </div>
       <div
-        class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+        class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
+      >
         <span class="flex items-center col-span-3"></span>
         <span class="col-span-2"></span>
         <!-- Pagination -->
@@ -71,12 +75,14 @@
                 <a
                   th:href="@{list(page=${result.prevPage}, size=${result.pageRequestDTO.size})}"
                   class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                  aria-label="Previous">
+                  aria-label="Previous"
+                >
                   <svg aria-hidden="true" class="w-4 h-4 fill-current" viewBox="0 0 20 20">
                     <path
                       d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                       clip-rule="evenodd"
-                      fill-rule="evenodd"></path>
+                      fill-rule="evenodd"
+                    ></path>
                   </svg>
                 </a>
               </li>
@@ -84,20 +90,23 @@
                 <a
                   class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
                   th:classappend="${result.current == page} ? 'text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600'"
-                  th:href="@{list(page=${page}, size=${result.pageRequestDTO.size})}">
+                  th:href="@{list(page=${page}, size=${result.pageRequestDTO.size})}"
+                >
                   [[${page}]]
                 </a>
               </li>
-              <li th:if="${result.next}"></li>>
-                <a th:href="@{list(page=${result.nextPage}, size=${result.pageRequestDTO.size})}"
+              <li th:if="${result.next}">
+                <a
+                  th:href="@{list(page=${result.nextPage}, size=${result.pageRequestDTO.size})}"
                   class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
                   aria-label="Next"
-                  >
+                >
                   <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
                     <path
                       d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                       clip-rule="evenodd"
-                      fill-rule="evenodd"></path>
+                      fill-rule="evenodd"
+                    ></path>
                   </svg>
                 </a>
               </li>

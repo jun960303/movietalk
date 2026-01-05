@@ -14,18 +14,19 @@ import com.example.movietalk.movie.service.MovieService;
 @SpringBootTest
 public class MovieServiceTest {
 
-  @Autowired
-  private MovieService movieService;
+    @Autowired
+    private MovieService movieService;
 
-  @Test
-  public void getMovieListTest() {
-    PageRequestDTO requestDTO = PageRequestDTO.builder()
-        .page(1)
-        .size(10)
-        .build();
+    @Test
+    public void getMovieListTest() {
 
-    PageResultDTO<MovieDTO> result = movieService.getMovieList(requestDTO);
+        PageRequestDTO requestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .build();
 
-    result.getDtoList().forEach(dto -> System.out.println(dto));
-  }
+        PageResultDTO<MovieDTO> result = movieService.getMovieList(requestDTO);
+
+        result.getDtoList().forEach(dto -> System.out.println(dto));
+    }
 }

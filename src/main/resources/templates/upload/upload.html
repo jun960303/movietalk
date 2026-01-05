@@ -9,39 +9,43 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
       integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer" />
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <h3>업로드 테스트</h3>
     <!-- <form action="" method="post" enctype="multipart/form-data">
-      <input type="file" name="uploadFile" id="" /> -->
-    <!-- </form> -->
+      <input type="file" name="uploadFile" id="" />
+    </form> -->
 
-    <!-- accept="image/png, image/jpeg"  : 첨부 파일 제한
-      multiple : 한번에 여러 개 파일 선택 가능
+    <!-- 
+        accept="image/png, image/jpeg" : 첨부 파일 제한
+        multiple : 한번에 여러 개 파일 선택 가능
     -->
     <input type="file" name="uploadFiles" id="" multiple accept="image/png, image/jpeg" />
     <button type="button">업로드</button>
     <div id="output"></div>
     <script>
-      // x를 누르면 파일 삭제 (이벤트 버블링 이용)
+      // X 를 클릭 시 파일 삭제(이벤트 버블링)
       document.querySelector("#output").addEventListener("click", (e) => {
         e.preventDefault();
-        //이벤트 대상은 누구인가?
-        console.log("이벤트 대상", e.target); // i태그
-        // i를 감싸고 있는  a 태그 필요
-        // closest() : 가장 가까운 부모 태그 요소 찾기
-        // href 값 필요
+        // 이벤트 대상은 누구인가?
+        console.log("이벤트 대상 ", e.target); // <i class="fa-solid fa-xmark"></i>
+        // i 를 감싸고 있는 a 태그 필요
+        // closest() : 가장 가까운 부모 요소 찾기
         const aTag = e.target.closest("a");
         const div = e.target.closest("div");
-        console.log("속성 값", aTag.href);
-        console.log("속성 값", aTag.getAttribute("href"));
+        // href 값 가져오기
+        // http://localhost:8080/upload/2025%2F12%2F29%2F24e1edce-6f27-4ed6-9c55-fb69805647c9_intotheworld1.jpg
+        // console.log("속성 값 ", aTag.href);
+        // console.log("속성 값 ", aTag.getAttribute("href"));
 
         const href = aTag.getAttribute("href");
 
         // 컨트롤러로 요청 보내기
         const formData = new FormData();
         formData.append("fileName", href);
+
         fetch("/upload/remove", {
           method: "post",
           body: formData,
@@ -49,7 +53,7 @@
           .then((res) => res.text())
           .then((data) => {
             console.log(data);
-            // 화면에서 이미지 제거하기
+            // 화면에서 이미지 제거
             div.remove();
           });
       });

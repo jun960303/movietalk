@@ -15,7 +15,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 @Builder
@@ -31,13 +30,19 @@ public class Member extends BaseEntity {
   @Id
   private Long mid;
 
+  @Column(unique = true)
   private String email;
-
   private String password;
-
   private String nickname;
 
   @Enumerated(EnumType.STRING)
   private Role role;
 
+  public void changeNickname(String nickname) {
+    this.nickname = nickname;
+  }
+
+  public void changePassword(String password) {
+    this.password = password;
+  }
 }

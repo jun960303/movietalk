@@ -12,14 +12,14 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class PageRequestDTO {
 
-  @Builder.Default
-  private int page = 1;
+    @Builder.Default
+    private int page = 1;
 
-  @Builder.Default
-  private int size = 20;
+    @Builder.Default
+    private int size = 20;
 
-  private String type;
+    private String type;
 
-  private String keyword;
+    private String keyword;
 
 }

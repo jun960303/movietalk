@@ -25,19 +25,27 @@ import lombok.ToString;
 @Entity
 public class Review extends BaseEntity {
 
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Id
-  private Long rno;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    private Long rno;
 
-  private int grade; // 리뷰점수
-  private String text; // 리뷰작성
+    private int grade; // 리뷰점수
 
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
-  @JoinColumn(name = "mno")
-  private Movie movie;
+    private String text; // 리뷰
 
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
-  @JoinColumn(name = "mid")
-  private Member member;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "mno")
+    private Movie movie;
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "mid")
+    private Member member;
+
+    public void changeText(String text) {
+        this.text = text;
+    }
+
+    public void changeGrade(int grade) {
+        this.grade = grade;
+    }
 }
